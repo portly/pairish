@@ -34,6 +34,10 @@ module Pssh
     attr_accessor :pty
     attr_accessor :web
 
+    def base_path
+      File.dirname(__FILE__) + "/.."
+    end
+
     def port
       @port ||= DEFAULT_PORT
     end
