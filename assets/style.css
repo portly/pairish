@@ -1,0 +1,29 @@
+body {
+  padding: 0;
+  overflow: hidden;
+}
+
+#term {
+  overflow: hidden;
+}
+
+.monospace {
+    font-family: "DejaVu Sans Mono", "Liberation Mono", monospace;
+    font-size: 11px;
+    padding: 0;
+  }
+.terminal {
+    font-family: "DejaVu Sans Mono", "Liberation Mono", monospace;
+    font-size: 11px;
+    line-height: 13px;
+    color: #f0f0f0;
+    background: #000;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.8) 2px 2px 20px;
+}
+
+.reverse-video {
+    color: #000;
+    background: #f0f0f0;
+}
+

@@ -1,0 +1,32 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.3.2)
+    daemons (1.1.9)
+    em-websocket (0.3.8)
+      addressable (>= 2.1.1)
+      eventmachine (>= 0.12.9)
+    eventmachine (1.0.1)
+    haml (4.0.0)
+      tilt
+    rack (1.5.2)
+    thin (1.5.0)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
+    tilt (1.4.1)
+    websocket-rack (0.4.0)
+      em-websocket (~> 0.3.6)
+      eventmachine (~> 1.0.0.beta.4)
+      rack
+      thin
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  haml
+  rack
+  thin
+  tilt
+  websocket-rack
