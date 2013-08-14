@@ -21,6 +21,10 @@ module Pssh
         opts.separator ''
         opts.separator 'Options:'
 
+        opts.on('--readonly', 'Only allow viewing the session, not writing.') do
+          options[:io_mode] = 'r'
+        end
+
         opts.on('-p PORT', '--port PORT', Integer, 'Set the port that Pssh will run on') do |port|
           options[:port] = port.to_i
         end
