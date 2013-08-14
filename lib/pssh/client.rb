@@ -6,7 +6,7 @@ module Pssh
       @web = Pssh.web = Pssh::WebConsole.new
       @app = Rack::Builder.new do
         map "/assets/" do
-          run Rack::File.new "./assets/"
+          run Rack::File.new "../assets/"
         end
         map "/socket" do
           run Pssh.pty

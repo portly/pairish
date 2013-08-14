@@ -1,7 +1,7 @@
 module Pssh
   class WebConsole
     def render(view, opts = {})
-      [200, { 'Content-Type' => 'text/html' }, Tilt::HamlTemplate.new("views/#{view}.haml").render(self, opts)]
+      [200, { 'Content-Type' => 'text/html' }, Tilt::HamlTemplate.new("../views/#{view}.haml").render(self, opts)]
     end
 
     def call(env)
