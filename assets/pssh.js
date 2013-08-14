@@ -1,5 +1,6 @@
 /*
 PSSH Javascript Client
+Modeled after WSSH: https://github.com/aluzzardi/wssh
 
 Usage:
 
