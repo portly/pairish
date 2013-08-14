@@ -1,35 +1,40 @@
 %html
   %head
     %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", :type => "application/javascript"}
-    %script{:src => "assets/wssh.js", :type => "application/javascript"}
+    %script{:src => "assets/pssh.js", :type => "application/javascript"}
     %script{:src => "assets/term.js", :type => "application/javascript"}
     :javascript
-      function init() {
+      jQuery(function() {
+
+        // Calculate the width of a character
         var k = document.createElement('span.monospace');
         k.innerHTML = '_';
         k.style.position = 'absolute';
         document.body.appendChild(k);
-
-        var size =
-        [
-        k.offsetWidth,
-        13 // k.offsetHeight
+        var size = [
+          k.offsetWidth,
+          13
         ];
-
-
         document.body.removeChild(k);
-        console.log(size[0]+' '+size[1]);
+
+        // Determine the browser width
         width = parseInt($(window).width() / size[0]);
         height = parseInt($(window).height() / size[1]);
+
+        // Set up the socket and the terminal
         first_time = true;
-        var client = new WSSHClient('#{unique_id}');
+        var client = new PsshClient('#{unique_id}');
         var term = new Terminal(width, height, function(key) {
           client.send(key);
         });
         term.open();
         $('.terminal').detach().appendTo('#term');
-        //term.resize(200, 40);
         term.write('Connecting...');
+
+        // Pretty sloppy usage that when connected sends over
+        // the browser size so we can request the right size window.
+        // It also handles reconnecting, which could more than likely
+        // be baked into the PsshClient.
         client.connect($.extend({}, {
             onError: function(error) {
                 term.write('Error: ' + error + "\\r\\n");
@@ -44,26 +49,24 @@
             onClose: function() {
               term.destroy();
               $('.terminal').remove();
-                //term.write('Connection Reset By Peer');
             },
             onTerminate: function() {
             },
             onData: function(data) {
-                console.log(data);
                 term.write(data);
             }
         }));
 
-        window.onresize = function() {
+        // When we resize the window, make sure the terminal changes too.
+        $(window).resize( function() {
           width = parseInt($(window).width() / size[0]);
           height = parseInt($(window).height() / size[1]);
           client.resize(width, height);
           term.resize(width, height);
-        };
+        });
 
-        function log(msg) { document.getElementById('log').innerHTML += msg + '<br>'; }
-      }
+      });
     %link{:href => "assets/bootstrap.css", :rel => "stylesheet"}/
     %link{:href => "assets/style.css", :rel => "stylesheet"}/
-  %body{:onload => "init();"}
+  %body
     #term
