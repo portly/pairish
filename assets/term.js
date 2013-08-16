@@ -1579,9 +1579,10 @@ Terminal.prototype.write = function(data) {
           // Send Device Attributes (Primary DA).
           // CSI > P s c
           // Send Device Attributes (Secondary DA)
-          case 'c':
-            this.sendDeviceAttributes(this.params);
-            break;
+          // We don't need this because we are controlling the device elsewhere.
+          // case 'c':
+          //   this.sendDeviceAttributes(this.params);
+          //   break;
 
           // CSI Pm d
           // Line Position Absolute  [row] (default = [1,column]) (VPA).
