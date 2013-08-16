@@ -16,7 +16,9 @@ Pssh. Is that even possible?
 Yup.
 
 ```ruby
-gem install pssh
+> gem install pssh
+# to get started, just run it from the command line
+> pssh
 ```
 
 It defaults to running on port 8022, but throw in a `-p PORT` flag and you're
