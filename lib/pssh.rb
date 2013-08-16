@@ -1,6 +1,7 @@
 require 'haml'
 require 'io/console'
 require 'json'
+require 'open-uri'
 require 'optparse'
 require 'pty'
 require 'readline'
@@ -11,15 +12,18 @@ require 'rack/websocket'
 require 'pssh/cli'
 require 'pssh/client'
 require 'pssh/console'
+require 'pssh/pty'
 require 'pssh/socket'
 require 'pssh/version'
-require 'pssh/web_console'
+require 'pssh/web'
 
 module Pssh
 
   DEFAULT_IO_MODE = 'rw'
-  DEFAULT_SOCKET_PREFIX = '/tmp/pssh'
+  DEFAULT_SOCKET_PREFIX = 'pssh'
   DEFAULT_PORT = 8022
+  DEFAULT_CACHE_LENGTH = 4096
+  PSSH_DOMAIN = 'pssh.herokuapp.com'
 
   class << self
 
@@ -29,6 +33,8 @@ module Pssh
     attr_writer :open_sessions
     attr_writer :port
     attr_writer :prompt
+    attr_accessor :socket_path
+    attr_accessor :cache_length
     attr_accessor :client
     attr_accessor :socket
     attr_accessor :pty
@@ -54,6 +60,23 @@ module Pssh
       @io_mode ||= DEFAULT_IO_MODE
     end
 
+    # Public: This method retrieves the current IP address and compresses
+    # it into a short url that can be shared to redirect to your site.
+    def share_url
+      return @share_url if @share_url
+      ip = open("http://#{PSSH_DOMAIN}/ip").read
+             .split('.')
+             .map { |x| x.to_i.to_s(36).rjust(2,'0') }
+             .join('')
+      @share_url = "http://#{PSSH_DOMAIN}/#{ip}#{port.to_i.to_s(36)}"
+    end
+
+    # Public: This sets the amount of data that will be stored to show
+    # new connections when they join.
+    def cache_length
+      @cache_length ||= DEFAULT_CACHE_LENGTH
+    end
+
     # Public: This is the prefix that will be used to set up the socket for tmux or screen.
     #
     # Returns a String.
@@ -66,7 +89,7 @@ module Pssh
     #
     # Returns a String.
     def default_socket_path
-      @socket ||= "#{socket_prefix}-#{SecureRandom.uuid}"
+      @socket_path ||= "#{socket_prefix}-#{SecureRandom.uuid}"
     end
 
     # Public: This is the tool which we are going to use for our multiplexing. If
@@ -79,9 +102,9 @@ module Pssh
       @command ||=
         (ENV['TMUX'] && :tmux) ||
         (ENV['STY'] && :screen) ||
-        (`which tmux` && :tmux) ||
-        (`which screen` && :screen) ||
         :shell
+        #(`which tmux` && :tmux) ||
+        #(`which screen` && :screen) ||
     end
 
     # Public: Allow configuring details of Pssh by making use of a block.

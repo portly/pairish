@@ -33,8 +33,8 @@ module Pssh
           options[:command] = command
         end
 
-        opts.on('-s PATH', '--socket PATH', String, 'Set the socket that will be used for connecting (/path/to/socket)') do |socket|
-          options[:socket] = socket
+        opts.on('-s NAME', '--socket NAME', String, 'Set the socket that will be used for connecting (socket-name)') do |socket|
+          options[:socket_path] = socket
         end
 
         opts.on( '-h', '--help', 'Display this help.' ) do

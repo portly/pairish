@@ -2,23 +2,26 @@ module Pssh
   class Client
 
     def initialize
-      @pty = Pssh.pty = Pssh::Socket.new
-      @web = Pssh.web = Pssh::WebConsole.new
+      @pty = Pssh.pty = Pssh::Pty.new
+      @socket = Pssh.socket = Pssh::Socket.new
+      @web = Pssh.web = Pssh::Web.new
       @app = Rack::Builder.new do
         map "/assets/" do
           run Rack::File.new "#{Pssh.base_path}/assets/"
         end
         map "/socket" do
-          run Pssh.pty
+          run Pssh.socket
         end
         map "/" do
           run Pssh.web
         end
       end
-      Thread.new do
-        @console = Console.new(pty: @pty, web: @web)
-      end
       Thin::Logging.silent = true
+      if Pssh.pty.existing?
+        Thread.new do
+          @console = Console.new
+        end
+      end
       Rack::Handler::Thin.run @app, Port: Pssh.port
     end
 

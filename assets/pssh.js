@@ -86,6 +86,7 @@ PsshClient.prototype.startSocket = function() {
 
   this._connection.onmessage = function (evt) {
     var data = JSON.parse(evt.data.toString());
+    console.log(data);
     if (data.error !== undefined) {
       _self.options.onError(data.error);
     } else if (data.close !== undefined) {
@@ -117,11 +118,11 @@ PsshClient.prototype.send = function(data) {
 };
 
 PsshClient.prototype.start = function(width, height) {
-  this._connection.send('s' + width + ',' + height);
+  this._connection.send('s' + height + ',' + width);
 };
 
 PsshClient.prototype.resize = function(width, height) {
-  this._connection.send('r' + width + ',' + height);
+  this._connection.send('r' + height + ',' + width);
 };
 
 PsshClient.prototype.reconnect = function() {
