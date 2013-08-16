@@ -29,37 +29,32 @@ BANNER
             end
             system("stty raw -echo")
           end
-          @active = true
-          while @active do
-            begin
-              io = [@read]
-              io << $stdin if new?
-              rs, ws = IO.select(io)
-              r = rs[0]
-              while (data = r.read_nonblock(2048)) do
-                if new? && r == $stdin
-                  @write.write_nonblock data
-                else
-                  $stdout.write_nonblock data if new?
-                  data.encode!('UTF-16', 'UTF-8', :invalid => :replace, :replace => '')
-                  data.encode!('UTF-8', 'UTF-16')
-                  if data.valid_encoding?
-                    store data
-                    Pssh.socket.write data
-                  end
+
+          begin
+            io = [@read]
+            io << $stdin if new?
+            rs, ws = IO.select(io)
+            r = rs[0]
+            while (data = r.read_nonblock(2048)) do
+              if new? && r == $stdin
+                @write.write_nonblock data
+              else
+                $stdout.write_nonblock data if new?
+                data.encode!('UTF-16', 'UTF-8', :invalid => :replace, :replace => '')
+                data.encode!('UTF-8', 'UTF-16')
+                if data.valid_encoding?
+                  store data
+                  Pssh.socket.write data
                 end
               end
-            rescue Exception => e
-              if @active
-                if e.is_a?(Errno::EAGAIN)
-                  retry
-                else
-                  system("stty -raw echo") if new?
-                  puts 'Terminating Pssh.'
-                  Kernel.exit!
-                  @active = false
-                end
-              end
+            end
+          rescue Exception => e
+            if e.is_a?(Errno::EAGAIN)
+              retry
+            else
+              system("stty -raw echo") if new?
+              puts 'Terminating Pssh.'
+              Kernel.exit!
             end
           end
         end
