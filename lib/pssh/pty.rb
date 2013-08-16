@@ -20,7 +20,7 @@ module Pssh
           if new?
             pssh = <<-BANNER
 # [ pssh terminal ]
-# Type `exit` to terminate this terminal.'
+# Type `exit` to terminate this terminal.
 # Type `pssh -h` for more options.
 BANNER
             $stdout.puts pssh
@@ -41,7 +41,7 @@ BANNER
                   @write.write_nonblock data
                 else
                   # gsub that data because it is funky
-                  $stdout.write_nonblock data.gsub(/\P\+q.{4}/,'') if new?
+                  $stdout.write_nonblock data if new?
                   data.encode!('UTF-16', 'UTF-8', :invalid => :replace, :replace => '')
                   data.encode!('UTF-8', 'UTF-16')
                   if data.valid_encoding?
