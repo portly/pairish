@@ -55,6 +55,7 @@ BANNER
                   retry
                 else
                   system("stty -raw echo") if new?
+                  puts 'Terminating Pssh.'
                   Kernel.exit!
                   @active = false
                 end
