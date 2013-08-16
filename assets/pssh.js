@@ -86,7 +86,6 @@ PsshClient.prototype.startSocket = function() {
 
   this._connection.onmessage = function (evt) {
     var data = JSON.parse(evt.data.toString());
-    console.log(data);
     if (data.error !== undefined) {
       _self.options.onError(data.error);
     } else if (data.close !== undefined) {
