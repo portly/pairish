@@ -42,4 +42,4 @@ You know what makes all this even easier? <a href="https://getportly.com">Portly
 Install Portly in seconds, add `localhost:8022` to your connections, and you can
 add authentication and share a classy URL right there on the spot.
 
-Thanks to those who are working on <a href="https://github.com/chjj/tty.js/">tty.js</a> and <a href="https://github.com/aluzzardi/wssh">WSSH</a> for making the job easier.
+Thanks to those who are working on <a href="https://github.com/chjj/term.js/">term.js</a> and <a href="https://github.com/aluzzardi/wssh">WSSH</a> for making the job easier.
