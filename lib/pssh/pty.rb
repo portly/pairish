@@ -18,10 +18,10 @@ module Pssh
           @read, @write, @pid = PTY.spawn(@command)
           @write.winsize = $stdout.winsize
           if new?
+            system("clear")
             pssh = <<-BANNER
 # [ pssh terminal ]
 # Type `exit` to terminate this terminal.
-# Type `pssh -h` for more options.
 BANNER
             $stdout.puts pssh
             Signal.trap(:WINCH) do
@@ -40,7 +40,6 @@ BANNER
                 if new? && r == $stdin
                   @write.write_nonblock data
                 else
-                  # gsub that data because it is funky
                   $stdout.write_nonblock data if new?
                   data.encode!('UTF-16', 'UTF-8', :invalid => :replace, :replace => '')
                   data.encode!('UTF-8', 'UTF-16')
@@ -51,8 +50,6 @@ BANNER
                 end
               end
             rescue Exception => e
-              #puts e.inspect
-              #puts e.backtrace
               if @active
                 if e.is_a?(Errno::EAGAIN)
                   retry
