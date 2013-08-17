@@ -103,8 +103,6 @@ module Pssh
         (ENV['TMUX'] && :tmux) ||
         (ENV['STY'] && :screen) ||
         :shell
-        #(`which tmux` && :tmux) ||
-        #(`which screen` && :screen) ||
     end
 
     # Public: Allow configuring details of Pssh by making use of a block.

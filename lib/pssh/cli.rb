@@ -29,10 +29,6 @@ module Pssh
           options[:port] = port.to_i
         end
 
-        opts.on('-c PATH', '--command COMMAND', [:tmux, :screen, :shell], 'Set the tool that will be used to initialize the web session (tmux, screen, or shell)') do |command|
-          options[:command] = command
-        end
-
         opts.on('-s NAME', '--socket NAME', String, 'Set the socket that will be used for connecting (socket-name)') do |socket|
           options[:socket_path] = socket
         end
