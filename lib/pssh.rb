@@ -22,7 +22,7 @@ module Pssh
   DEFAULT_IO_MODE = 'rw'
   DEFAULT_SOCKET_PREFIX = 'pssh'
   DEFAULT_PORT = 8022
-  DEFAULT_CACHE_LENGTH = 4096
+  DEFAULT_CACHE_LENGTH = 16384
   PSSH_DOMAIN = 'pssh.herokuapp.com'
 
   class << self
