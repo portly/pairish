@@ -314,7 +314,7 @@ Terminal.colors[257] = Terminal.defaultColors.fg;
  * Options
  */
 
-Terminal.termName = 'xterm-256color';
+Terminal.termName = 'rxvt-unicode';
 Terminal.geometry = [80, 24];
 Terminal.cursorBlink = true;
 Terminal.visualBell = false;
@@ -1579,10 +1579,9 @@ Terminal.prototype.write = function(data) {
           // Send Device Attributes (Primary DA).
           // CSI > P s c
           // Send Device Attributes (Secondary DA)
-          // We don't need this because we are controlling the device elsewhere.
-          // case 'c':
-          //   this.sendDeviceAttributes(this.params);
-          //   break;
+          case 'c':
+            this.sendDeviceAttributes(this.params);
+            break;
 
           // CSI Pm d
           // Line Position Absolute  [row] (default = [1,column]) (VPA).
@@ -2250,7 +2249,6 @@ Terminal.prototype.send = function(data) {
       self.queue = '';
     }, 1);
   }
-
   this.queue += data;
 };
 
