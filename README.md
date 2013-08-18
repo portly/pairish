@@ -24,7 +24,6 @@ Yup.
 It defaults to running on port 8022, but throw in a `-p PORT` flag and you're
 up and running on whatever port.  If you're in a tmux or screen session, it'll
 share that.  If you're not, no worries. **Pssh has its own session sharing built in.**
-And if you want to use tmux or screen, go right ahead and use the `-c tmux` flag.
 
 If you're already in a tmux or screen session, you'll have a pseudo-terminal
 that lets you see who's connected, kick people off, and a few other handy things.
