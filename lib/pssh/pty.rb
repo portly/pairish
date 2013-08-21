@@ -9,15 +9,27 @@ module Pssh
     attr_reader :path
     attr_reader :attach_cmd
 
+    def self.start
+      return @pty if @pty
+      @pty = self.new
+      @pty.start_pty
+      @pty
+    end
+
     def initialize
       @stream = ''
       set_command
       clear_environment
-      Thread.new do
+    end
+
+    def start_pty
+      @thread = Thread.new do
         begin
           @read, @write, @pid = PTY.spawn(@command)
           @write.winsize = $stdout.winsize
           if new?
+            # we need to clear the screen and handle the stuff
+            # that tmux and screen usually do.
             system("clear")
             pssh = <<-BANNER
 # [ pssh terminal ]

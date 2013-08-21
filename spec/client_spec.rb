@@ -14,7 +14,7 @@ describe Pssh::Client do
       allow(Pssh::Web).to receive(:new)
       allow(Rack::Builder).to receive(:new)
 
-      expect(Pssh::Pty).to receive(:new).and_return @stubbed_pty
+      expect(Pssh::Pty).to receive(:start).and_return @stubbed_pty
       expect(Pssh).to receive(:pty=).with(@stubbed_pty)
       allow(Pssh).to receive(:pty).and_return @stubbed_pty
 
@@ -22,7 +22,7 @@ describe Pssh::Client do
     end
 
     it 'starts up a WebSocket' do
-      allow(Pssh::Pty).to receive(:new).and_return(@stubbed_pty)
+      allow(Pssh::Pty).to receive(:start).and_return(@stubbed_pty)
       allow(Pssh::Web).to receive(:new)
       allow(Rack::Builder).to receive(:new)
 
@@ -35,7 +35,7 @@ describe Pssh::Client do
     end
 
     it 'starts up a Web App' do
-      allow(Pssh::Pty).to receive(:new).and_return(@stubbed_pty)
+      allow(Pssh::Pty).to receive(:start).and_return(@stubbed_pty)
       allow(Pssh::Socket).to receive(:new)
       allow(Rack::Builder).to receive(:new)
 
@@ -50,7 +50,7 @@ describe Pssh::Client do
     it 'creates another thread for a console' do
       stubbed_pty = double(:pty)
       allow(stubbed_pty).to receive(:existing?).and_return true
-      allow(Pssh::Pty).to receive(:new).and_return(stubbed_pty)
+      allow(Pssh::Pty).to receive(:start).and_return(stubbed_pty)
       allow(Pssh::Web).to receive(:new)
       allow(Pssh::Socket).to receive(:new)
       allow(Rack::Builder).to receive(:new)
@@ -62,7 +62,7 @@ describe Pssh::Client do
     it 'creates a console' do
       stubbed_pty = double(:pty)
       allow(stubbed_pty).to receive(:existing?).and_return true
-      allow(Pssh::Pty).to receive(:new).and_return(stubbed_pty)
+      allow(Pssh::Pty).to receive(:start).and_return(stubbed_pty)
       allow(Pssh::Web).to receive(:new)
       allow(Pssh::Socket).to receive(:new)
       allow(Rack::Builder).to receive(:new)
@@ -76,7 +76,7 @@ describe Pssh::Client do
       port = double(:port)
       app = double(:app)
       allow(Pssh).to receive(:port).and_return port
-      allow(Pssh::Pty).to receive(:new).and_return(@stubbed_pty)
+      allow(Pssh::Pty).to receive(:start).and_return(@stubbed_pty)
       allow(Pssh::Web).to receive(:new)
       allow(Pssh::Socket).to receive(:new)
       allow(Rack::Builder).to receive(:new).and_return(app)

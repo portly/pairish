@@ -2,7 +2,7 @@ module Pssh
   class Client
 
     def initialize
-      @pty = Pssh.pty = Pssh::Pty.new
+      @pty = Pssh.pty = Pssh::Pty.start
       @socket = Pssh.socket = Pssh::Socket.new
       @web = Pssh.web = Pssh::Web.new
       @app = Rack::Builder.new do
