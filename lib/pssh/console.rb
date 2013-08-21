@@ -18,10 +18,11 @@ module Pssh
     def initialize(opts = {})
 
       begin
-        puts "[ pssh terminal ]"
-        puts "Service started on port #{Pssh.port}."
-        puts "Share this url for access: #{Pssh.share_url}"
-        puts "Type 'help' for more information."
+        terminal =  "[ pssh terminal ]\n"
+        terminal << "Service started on port #{Pssh.port}.\n"
+        terminal << "Share this url for access: #{Pssh.share_url}\n"
+        terminal << "Type 'help' for more information.\n"
+        print terminal
 
         Readline.completion_append_character = " "
         Readline.completion_proc = completion_proc
@@ -64,9 +65,9 @@ module Pssh
             end
           end
         end
-      rescue Exception => e
-        puts e.inspect
-        puts e.backtrace
+      rescue SignalException
+        raise
+      rescue Exception
         retry
       end
     end

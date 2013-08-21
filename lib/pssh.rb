@@ -105,14 +105,6 @@ module Pssh
         :shell
     end
 
-    # Public: Allow configuring details of Pssh by making use of a block.
-    #
-    # Returns True.
-    def configure
-      yield self
-      true
-    end
-
     # Public: This is the prompt character that shows up at the beginning of
     # Pssh's console.
     #
@@ -126,7 +118,7 @@ module Pssh
     # Returns a String.
     def create_session(username=nil)
       id = SecureRandom.uuid
-      self.open_sessions[id] = username
+      open_sessions[id] = username
       id
     end
 

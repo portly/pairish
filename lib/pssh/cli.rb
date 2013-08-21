@@ -45,12 +45,10 @@ module Pssh
       options
     end
 
-    def self.run(args)
+    def self.run(args=[])
       opts = parse_options(args)
-      Pssh.configure do |pssh|
-        opts.each do |k,v|
-          pssh.send :"#{k}=", v
-        end
+      opts.each do |k,v|
+        Pssh.send :"#{k}=", v
       end
       Pssh::Client.start
     end

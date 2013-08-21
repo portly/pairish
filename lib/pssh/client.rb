@@ -18,7 +18,7 @@ module Pssh
       end
       Thin::Logging.silent = true
       if Pssh.pty.existing?
-        Thread.new do
+        @thread = Thread.new do
           @console = Console.new
         end
       end
