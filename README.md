@@ -1,5 +1,7 @@
 ##Pssh.
 
+[![Build Status](https://travis-ci.org/portly/pssh.png?branch=master)](https://travis-ci.org/portly/pssh)
+
 Ever have an itch to show code off to your buddies? Or how about make an ASCII dog
 run across the screen while your co-workers watch in awe?
 
