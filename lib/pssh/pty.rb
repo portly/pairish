@@ -106,7 +106,6 @@ BANNER
         else
           @path = Pssh.default_socket_path
           @command = "screen -S #{@path}"
-          puts @command
         end
         @attach_cmd = "screen -x #{@path}"
       else
