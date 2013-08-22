@@ -1,4 +1,4 @@
-require 'helper'
+require 'spec_helper'
 
 describe Pssh do
 
@@ -44,6 +44,7 @@ describe Pssh do
 
   describe '.default_socket_path' do
     it 'models the format: socket_prefix-randomnumber' do
+      Pssh.instance_variable_set(:@socket_path, nil)
       allow(SecureRandom).to receive(:uuid).and_return 'random'
       allow(Pssh).to receive(:socket_prefix).and_return 'prefix'
       expect(Pssh.default_socket_path).to eq('prefix-random')
