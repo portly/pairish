@@ -64,11 +64,16 @@ that shell. Just type <code>exit</code> to quit and kick everyone else off too.<
 <p>Check out all the options with the <code>-h</code> flag, or list the console commands by
 typing <code>help</code> when you start up Pssh inside tmux/screen.</p>
 
-<p>There's also support in there for HTTP basic authentication if you're running
-behind that layer. But that adds to the complexities.</p>
+<pre><code>Options:
+        --readonly                   Only allow viewing the session, not writing.
+    -p, --port PORT                  Set the port that Pssh will run on
+    -s, --socket NAME                Set the socket that will be used for connecting (socket-name)
+    -h, --help                       Display this help.
+</code></pre>
 
-<p>You know what makes all this even easier? <a href="https://getportly.com">Portly</a> does.
-Install Portly in seconds, add <code>localhost:8022</code> to your connections, and you can
+<p>There's also support for HTTP basic authentication when combined with <a href="https://getportly.com">Portly</a>.</p>
+
+<p>Install Portly in seconds, add <code>localhost:8022</code> to your connections, and you can
 add authentication and share a classy URL right there on the spot.</p>
 
 <p>Thanks to those who are working on <a href="https://github.com/chjj/term.js/">term.js</a> and <a href="https://github.com/aluzzardi/wssh">WSSH</a> for making the job easier.</p>
