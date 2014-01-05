@@ -39,7 +39,7 @@ typing `help` when you start up Pssh inside tmux/screen.
 There's also support in there for HTTP basic authentication if you're running
 behind that layer. But that adds to the complexities.
 
-You know what makes all this even easier? <a href="https://getportly.com">Portly</a> does.
+You know what makes all this even easier? <a href="https://portly.co">Portly</a> does.
 Install Portly in seconds, add `localhost:8022` to your connections, and you can
 add authentication and share a classy URL right there on the spot.
 
