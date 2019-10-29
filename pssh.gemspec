@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rack', '~> 1.5.2'
   gem.add_dependency 'thin', '~> 1.5.0'
   gem.add_dependency 'websocket-rack', '~> 0.4.0'
-  gem.add_dependency 'haml', '~> 4.0.0'
+  gem.add_dependency 'haml', '>= 4.0', '< 5.2'
   gem.add_dependency 'tilt', '~> 1.4.1'
 
 end
