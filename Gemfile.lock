@@ -10,7 +10,7 @@ GEM
     eventmachine (1.0.1)
     haml (4.0.0)
       tilt
-    rack (1.5.2)
+    rack (2.1.4)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)

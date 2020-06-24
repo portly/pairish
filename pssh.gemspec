@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.version       = Pssh::VERSION
 
   gem.add_dependency 'json', '~> 1.8.0'
-  gem.add_dependency 'rack', '~> 1.5.2'
+  gem.add_dependency 'rack', '>= 1.5.2', '< 2.3.0'
   gem.add_dependency 'thin', '~> 1.5.0'
   gem.add_dependency 'websocket-rack', '~> 0.4.0'
   gem.add_dependency 'haml', '~> 4.0.0'
