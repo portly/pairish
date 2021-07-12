@@ -1,7 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.3.2)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     daemons (1.1.9)
     diff-lcs (1.2.4)
     em-websocket (0.3.8)
@@ -10,6 +11,7 @@ GEM
     eventmachine (1.0.1)
     haml (4.0.0)
       tilt
+    public_suffix (4.0.6)
     rack (1.5.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
